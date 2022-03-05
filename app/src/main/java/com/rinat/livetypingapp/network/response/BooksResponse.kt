@@ -6,6 +6,10 @@ data class Book(val volumeInfo: VolumeInfo)
 
 data class VolumeInfo(
     val title: String,
-    val authors: Array<String>
-
+    val authors: Array<String>,
+    val imageLinks:ImageLink?
+)
+data class ImageLink(
+    val smallThumbnail: String,
+    val thumbnail: String
 )
