@@ -46,7 +46,6 @@ class BookAdapter(private val listener: OnItemClickListener) :
 
         fun bind(book: Book) {
             binding.apply {
-                println("book is "+Gson().toJson(book))
                 tvBookName.text=book.volumeInfo.title
 
                 book.volumeInfo.authors?.let {
@@ -56,12 +55,11 @@ class BookAdapter(private val listener: OnItemClickListener) :
                 book.volumeInfo.imageLinks?.let {
                         Glide
                             .with(ivBookIcon)
-                            .load(book.volumeInfo.imageLinks.smallThumbnail)
+                            .load(book.volumeInfo.imageLinks.thumbnail)
                             .centerCrop()
                             //.placeholder(R.drawable.loading_spinner)
                             .into(ivBookIcon);
                     }
-
             }
         }
     }

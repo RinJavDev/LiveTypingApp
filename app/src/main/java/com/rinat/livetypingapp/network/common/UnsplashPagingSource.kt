@@ -19,7 +19,7 @@ class UnsplashPagingSource(
 
         return try {
             val response = unsplashApi.getBooks(query,position*params.loadSize)
-            val books = response.body()!!.items
+            val books = response.body()?.items?: emptyList<Book>()
 
             LoadResult.Page(
                 data = books,
