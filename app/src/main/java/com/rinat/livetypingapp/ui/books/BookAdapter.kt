@@ -1,4 +1,4 @@
-package com.rinat.livetypingapp.ui
+package com.rinat.livetypingapp.ui.books
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
-import com.rinat.livetypingapp.R
 import com.rinat.livetypingapp.databinding.IBookBinding
 import com.rinat.livetypingapp.network.response.Book
 
@@ -46,20 +44,19 @@ class BookAdapter(private val listener: OnItemClickListener) :
 
         fun bind(book: Book) {
             binding.apply {
-                tvBookName.text=book.volumeInfo.title
+                tvBookName.text = book.volumeInfo.title
 
                 book.volumeInfo.authors?.let {
-                    tvAuthor.text=book.volumeInfo.authors[0]
+                    tvAuthor.text = book.volumeInfo.authors[0]
                 }
 
                 book.volumeInfo.imageLinks?.let {
-                        Glide
-                            .with(ivBookIcon)
-                            .load(book.volumeInfo.imageLinks.thumbnail)
-                            .centerCrop()
-                            //.placeholder(R.drawable.loading_spinner)
-                            .into(ivBookIcon);
-                    }
+                    Glide
+                        .with(ivBookIcon)
+                        .load(book.volumeInfo.imageLinks.thumbnail)
+                        //.placeholder(R.drawable.loading_spinner)
+                        .into(ivBookIcon);
+                }
             }
         }
     }

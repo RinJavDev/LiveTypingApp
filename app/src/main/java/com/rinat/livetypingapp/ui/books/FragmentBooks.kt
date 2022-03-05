@@ -1,4 +1,4 @@
-package com.rinat.livetypingapp.ui
+package com.rinat.livetypingapp.ui.books
 
 import android.os.Bundle
 import android.view.View
@@ -13,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rinat.livetypingapp.R
 import com.rinat.livetypingapp.databinding.FBooksBinding
 import com.rinat.livetypingapp.network.response.Book
+import com.rinat.livetypingapp.util.SimpleDividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -80,7 +81,9 @@ class FragmentBooks : Fragment(R.layout.f_books), BookAdapter.OnItemClickListene
         }
     }
 
-    override fun onItemClick(photo: Book) {}
+    override fun onItemClick(book: Book) {
+        viewModel.openDetail(book)
+    }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         query?.let {

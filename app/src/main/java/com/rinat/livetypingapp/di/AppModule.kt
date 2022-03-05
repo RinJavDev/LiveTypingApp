@@ -2,6 +2,7 @@ package com.rinat.livetypingapp.di
 
 import com.rinat.livetypingapp.network.NetworkDataSource
 import com.rinat.livetypingapp.network.api.BookApi
+import com.rinat.livetypingapp.router.MainRouter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,11 +19,11 @@ import javax.inject.Singleton
 object AppModule {
 
     @Provides
-    fun providesBaseUrl() : String = "https://www.googleapis.com/"
+    fun providesBaseUrl(): String = "https://www.googleapis.com/"
 
     @Provides
     @Singleton
-    fun provideRetrofit(BASE_URL : String) : Retrofit {
+    fun provideRetrofit(BASE_URL: String): Retrofit {
         val interceptor = HttpLoggingInterceptor()
         interceptor.apply { interceptor.level = HttpLoggingInterceptor.Level.BODY }
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
@@ -36,11 +37,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideBookApi(retrofit : Retrofit) : BookApi = retrofit.create(BookApi::class.java)
+    fun provideBookApi(retrofit: Retrofit): BookApi = retrofit.create(BookApi::class.java)
 
     @Provides
     @Singleton
-    fun provideNetworkDataSource(bookApi : BookApi) : NetworkDataSource = NetworkDataSource(bookApi)
+    fun provideNetworkDataSource(bookApi: BookApi): NetworkDataSource = NetworkDataSource(bookApi)
 
+    @Provides
+    @Singleton
+    fun providesMainRouter() = MainRouter()
 
 }

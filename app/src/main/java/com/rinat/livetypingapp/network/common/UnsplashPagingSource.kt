@@ -7,7 +7,7 @@ import com.rinat.livetypingapp.network.response.Book
 import retrofit2.HttpException
 import java.io.IOException
 
-private const val UNSPLASH_STARTING_PAGE_INDEX = 1
+private const val UNSPLASH_STARTING_PAGE_INDEX = 0
 
 class UnsplashPagingSource(
     private val unsplashApi: BookApi,
@@ -18,9 +18,8 @@ class UnsplashPagingSource(
         val position = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
 
         return try {
-            val response = unsplashApi.getBooks(query,position*params.loadSize)
-            val books = response.body()?.items?: emptyList<Book>()
-
+            val response = unsplashApi.getBooks(query, params.loadSize)
+            val books = response.body()?.items ?: emptyList<Book>()
             LoadResult.Page(
                 data = books,
                 prevKey = if (position == UNSPLASH_STARTING_PAGE_INDEX) null else position - 1,

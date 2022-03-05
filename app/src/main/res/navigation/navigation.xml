@@ -7,7 +7,17 @@
 
     <fragment
         android:id="@+id/fragmentBooks"
-        android:name="com.rinat.livetypingapp.ui.FragmentBooks"
+        android:name="com.rinat.livetypingapp.ui.books.FragmentBooks"
         android:label="f_books"
-        tools:layout="@layout/f_books" />
+        tools:layout="@layout/f_books">
+        <action
+            android:id="@+id/action_fragmentBooks_to_fragmentDetailBook"
+            app:destination="@id/fragmentDetailBook" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentDetailBook"
+        android:name="com.rinat.livetypingapp.ui.detail_book.DetailBookFragment"
+        android:label="f_detail_book"
+        tools:layout="@layout/f_detail_book" />
 </navigation>

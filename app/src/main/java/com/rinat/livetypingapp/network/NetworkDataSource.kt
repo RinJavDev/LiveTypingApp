@@ -18,5 +18,5 @@ class NetworkDataSource @Inject constructor(private val mainService: BookApi) {
             pagingSourceFactory = { UnsplashPagingSource(mainService, query) }
         ).flow
 
-    suspend fun getUser(query: String, index: Int) = mainService.getBooks(query, index).body()
+    suspend fun getBooks(query: String, index: Int) = mainService.getBooks(query, index).body()
 }

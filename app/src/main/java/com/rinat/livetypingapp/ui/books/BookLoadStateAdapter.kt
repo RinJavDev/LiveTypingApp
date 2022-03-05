@@ -1,4 +1,4 @@
-package com.rinat.livetypingapp.ui
+package com.rinat.livetypingapp.ui.books
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
