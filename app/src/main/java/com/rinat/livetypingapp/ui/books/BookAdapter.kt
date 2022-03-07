@@ -8,11 +8,12 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.rinat.livetypingapp.data.BookPreview
 import com.rinat.livetypingapp.databinding.IBookBinding
-import com.rinat.livetypingapp.network.response.Book
+import com.rinat.livetypingapp.network.response.BookModel
 
 class BookAdapter(private val listener: OnItemClickListener) :
-    PagingDataAdapter<Book, BookAdapter.BookViewHolder>(BOOK_COMPARATOR) {
+    PagingDataAdapter<BookPreview, BookAdapter.BookViewHolder>(BOOK_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val binding =
@@ -54,37 +55,37 @@ class BookAdapter(private val listener: OnItemClickListener) :
 
         }
 
-        fun bind(book: Book, position: Int) {
+        fun bind(bookModel: BookPreview, position: Int) {
             binding.apply {
                 ViewCompat.setTransitionName(tvBookName, "tvBookName$position")
                 ViewCompat.setTransitionName(tvAuthor, "tvAuthor$position")
                 ViewCompat.setTransitionName(ivBookIcon, "ivBookIcon$position")
 
-                tvBookName.text = book.volumeInfo.title
-                book.volumeInfo.authors?.let {
-                    tvAuthor.text = book.volumeInfo.authors[0]
-                }
-                book.volumeInfo.imageLinks?.let {
+                tvBookName.text = bookModel.name
+
+                    tvAuthor.text = bookModel.author
+
+
                     Glide
                         .with(ivBookIcon)
-                        .load(book.volumeInfo.imageLinks.thumbnail)
+                        .load(bookModel.imageUrl)
                         //.placeholder(R.drawable.loading_spinner)
                         .into(ivBookIcon);
-                }
+
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(photo: Book, extras: FragmentNavigator.Extras)
+        fun onItemClick(photo: BookPreview, extras: FragmentNavigator.Extras)
     }
 
     companion object {
-        private val BOOK_COMPARATOR = object : DiffUtil.ItemCallback<Book>() {
-            override fun areItemsTheSame(oldItem: Book, newItem: Book) =
-                oldItem.volumeInfo == newItem.volumeInfo
+        private val BOOK_COMPARATOR = object : DiffUtil.ItemCallback<BookPreview>() {
+            override fun areItemsTheSame(oldItem: BookPreview, newItem: BookPreview) =
+                oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: Book, newItem: Book) =
+            override fun areContentsTheSame(oldItem: BookPreview, newItem: BookPreview) =
                 oldItem == newItem
         }
     }

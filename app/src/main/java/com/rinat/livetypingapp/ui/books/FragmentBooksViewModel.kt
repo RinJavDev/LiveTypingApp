@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.rinat.livetypingapp.data.BookPreview
 import com.rinat.livetypingapp.network.NetworkDataSource
-import com.rinat.livetypingapp.network.response.Book
 import com.rinat.livetypingapp.router.MainRouter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -18,16 +18,16 @@ class FragmentBooksViewModel @Inject constructor(private val networkDataSource: 
     @Inject
     lateinit var router: MainRouter
 
-    private var _booksFlow: Flow<PagingData<Book>> = networkDataSource.getSearchResults("")
-    val booksFlow: Flow<PagingData<Book>>
+    private var _booksFlow: Flow<PagingData<BookPreview>> = networkDataSource.getSearchResults("")
+    val booksFlow: Flow<PagingData<BookPreview>>
         get() = _booksFlow
 
-    fun getBooks(query: String): Flow<PagingData<Book>> {
+    fun getBooks(query: String): Flow<PagingData<BookPreview>> {
         _booksFlow = networkDataSource.getSearchResults(query).cachedIn(viewModelScope)
         return booksFlow
     }
 
-    fun openDetail(book: Book, extras: FragmentNavigator.Extras) {
-        router.navigateToDetailBookInfo(book, extras)
+    fun openDetail(bookModel: BookPreview, extras: FragmentNavigator.Extras) {
+        router.navigateToDetailBookInfo(bookModel, extras)
     }
 }

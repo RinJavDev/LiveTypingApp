@@ -44,10 +44,15 @@
         android:id="@+id/sv_books"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:showDividers="end"
+        android:theme="@style/WallSearchView"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:showAsAction="ifRoom" />
 
     <ProgressBar
         android:id="@+id/progressBar"
