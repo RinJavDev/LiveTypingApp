@@ -3,6 +3,7 @@ package com.rinat.livetypingapp.ui.books
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -38,7 +39,6 @@ class FragmentBooks : Fragment(R.layout.f_books), BookAdapter.OnItemClickListene
 
         postponeEnterTransition()
         (view).doOnPreDraw {
-            println("doOnPreDraw")
             startPostponedEnterTransition()
         }
 
@@ -56,26 +56,27 @@ class FragmentBooks : Fragment(R.layout.f_books), BookAdapter.OnItemClickListene
                 header = BookLoadStateAdapter { adapter.retry() },
                 footer = BookLoadStateAdapter { adapter.retry() }
             )
-            //  buttonRetry.setOnClickListener { adapter.retry() }
             svBooks.setOnQueryTextListener(this@FragmentBooks)
         }
-
         lifecycleScope.launchWhenCreated {
-            viewModel.booksFlow.collect {
+            viewModel.booksFlow?.collect {
                 adapter.submitData(viewLifecycleOwner.lifecycle, it)
             }
         }
-
         adapter.addLoadStateListener { loadState ->
             binding.apply {
+                val loadStateSourceRefresh = loadState.source.refresh
                 rvBooks.isVisible = true
-                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
-                //rvBooks.isVisible = loadState.source.refresh is LoadState.NotLoading
-                //buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
-                //textViewError.isVisible = loadState.source.refresh is LoadState.Error
-
+                progressBar.isVisible = loadStateSourceRefresh is LoadState.Loading
+                if (loadStateSourceRefresh is LoadState.Error) {
+                    Toast.makeText(
+                        requireContext(),
+                        "${loadStateSourceRefresh.error.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 // empty view
-                if (loadState.source.refresh is LoadState.NotLoading &&
+                if (loadStateSourceRefresh is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached &&
                     adapter.itemCount < 1
                 ) {
@@ -93,9 +94,10 @@ class FragmentBooks : Fragment(R.layout.f_books), BookAdapter.OnItemClickListene
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+
         query?.let {
             lifecycleScope.launchWhenCreated {
-                viewModel.getBooks(query).collect {
+                viewModel.getBooks(query)?.collect {
                     adapter.submitData(viewLifecycleOwner.lifecycle, it)
                 }
             }

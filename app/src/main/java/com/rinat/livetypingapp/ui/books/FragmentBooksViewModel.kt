@@ -20,11 +20,11 @@ class FragmentBooksViewModel @Inject constructor(
     ViewModel() {
 
 
-    private var _booksFlow: Flow<PagingData<BookPreview>> = networkDataSource.getSearchResults("")
-    val booksFlow: Flow<PagingData<BookPreview>>
+    private var _booksFlow: Flow<PagingData<BookPreview>>? = null
+    val booksFlow: Flow<PagingData<BookPreview>>?
         get() = _booksFlow
 
-    fun getBooks(query: String): Flow<PagingData<BookPreview>> {
+    fun getBooks(query: String): Flow<PagingData<BookPreview>>? {
         _booksFlow = networkDataSource.getSearchResults(query).cachedIn(viewModelScope)
         return booksFlow
     }

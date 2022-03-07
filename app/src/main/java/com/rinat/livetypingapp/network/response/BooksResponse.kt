@@ -1,6 +1,6 @@
 package com.rinat.livetypingapp.network.response
 
-data class BooksResponse(val items: List<BookModel>)
+data class BooksResponse(val items: List<BookModel>?, val error: Error?)
 
 open class BookModel(val volumeInfo: VolumeInfo)
 

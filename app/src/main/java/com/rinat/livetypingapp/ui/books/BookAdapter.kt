@@ -42,7 +42,6 @@ class BookAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 root.setOnClickListener {
                     val position = bindingAdapterPosition
-                    println("bindingAdapterPosition is $bindingAdapterPosition")
                     if (position != RecyclerView.NO_POSITION) {
                         val item = getItem(position)
                         if (item != null) {
