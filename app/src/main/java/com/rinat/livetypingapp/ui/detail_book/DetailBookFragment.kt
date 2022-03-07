@@ -9,7 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.rinat.livetypingapp.R
 import com.rinat.livetypingapp.databinding.FDetailBookBinding
-import com.rinat.livetypingapp.util.Constants
+import com.rinat.livetypingapp.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,21 +30,17 @@ class DetailBookFragment : Fragment(R.layout.f_detail_book) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var args = getArguments()
+        val args = getArguments()
         binding.apply {
-
-            args?.getString(Constants.IMAGE_URL_ARG, null)?.let {
-                Glide
-                    .with(imageView)
-                    .load(it)
-                    //.placeholder(R.drawable.loading_spinner)
-                    .into(imageView);
-            }
-            args?.getString(Constants.BOOK_TITLE_ARG, null)?.let {
-                tvBookName.text = it
-            }
-            args?.getString(Constants.BOOK_AUTHOR_ARG, null)?.let {
-                tvAuthor.text = it
+            Glide
+                .with(imageView)
+                .load(args?.getString(Constants.IMAGE_URL_ARG, null))
+                .error(R.drawable.error_image)
+                .into(imageView)
+            tvBookName.text = args?.getString(Constants.BOOK_TITLE_ARG, null)
+            tvAuthor.text = args?.getString(Constants.BOOK_AUTHOR_ARG, null)
+            toolbarDetailBook.setNavigationOnClickListener {
+                viewModel.navigateBack()
             }
         }
     }

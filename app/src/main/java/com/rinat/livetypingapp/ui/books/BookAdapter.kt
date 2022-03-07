@@ -7,7 +7,10 @@ import androidx.navigation.fragment.FragmentNavigator
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.rinat.livetypingapp.R
 import com.rinat.livetypingapp.data.BookPreview
 import com.rinat.livetypingapp.databinding.IBookBinding
 import com.rinat.livetypingapp.network.response.BookModel
@@ -39,11 +42,11 @@ class BookAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 root.setOnClickListener {
                     val position = bindingAdapterPosition
-
+                    println("bindingAdapterPosition is $bindingAdapterPosition")
                     if (position != RecyclerView.NO_POSITION) {
                         val item = getItem(position)
                         if (item != null) {
-                            var extras = FragmentNavigator.Extras.Builder()
+                            val extras = FragmentNavigator.Extras.Builder()
                                 .addSharedElement(tvBookName, "tv_book_name")
                                 .addSharedElement(tvAuthor, "tv_author")
                                 .addSharedElement(ivBookIcon, "imageView").build()
@@ -55,29 +58,31 @@ class BookAdapter(private val listener: OnItemClickListener) :
 
         }
 
-        fun bind(bookModel: BookPreview, position: Int) {
+        fun bind(bookPreview: BookPreview, position: Int) {
             binding.apply {
                 ViewCompat.setTransitionName(tvBookName, "tvBookName$position")
                 ViewCompat.setTransitionName(tvAuthor, "tvAuthor$position")
                 ViewCompat.setTransitionName(ivBookIcon, "ivBookIcon$position")
 
-                tvBookName.text = bookModel.name
+                tvBookName.text = bookPreview.name
 
-                    tvAuthor.text = bookModel.author
+                    tvAuthor.text = bookPreview.author
 
 
                     Glide
                         .with(ivBookIcon)
-                        .load(bookModel.imageUrl)
-                        //.placeholder(R.drawable.loading_spinner)
-                        .into(ivBookIcon);
+                        .load(bookPreview.imageUrl)
+                        .placeholder(R.drawable.loading)
+                        .error(R.drawable.error_image)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(ivBookIcon)
 
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(photo: BookPreview, extras: FragmentNavigator.Extras)
+        fun onItemClick(bookPreview: BookPreview, extras: FragmentNavigator.Extras)
     }
 
     companion object {

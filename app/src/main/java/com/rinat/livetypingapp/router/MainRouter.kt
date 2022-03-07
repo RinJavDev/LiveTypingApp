@@ -7,7 +7,7 @@ import androidx.navigation.fragment.FragmentNavigator
 import com.rinat.livetypingapp.R
 import com.rinat.livetypingapp.data.BookPreview
 import com.rinat.livetypingapp.ui.MainActivity
-import com.rinat.livetypingapp.util.Constants
+import com.rinat.livetypingapp.utils.Constants
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -34,11 +34,11 @@ class MainRouter @Inject constructor() {
         }
     }
 
-    fun navigateToDetailBookInfo(bookModel: BookPreview, extras: FragmentNavigator.Extras) {
+    fun navigateToDetailBookInfo(bookPreview: BookPreview, extras: FragmentNavigator.Extras) {
         val bundle = Bundle()
-        bundle.putString(Constants.BOOK_TITLE_ARG, bookModel.name)
-        bundle.putString(Constants.BOOK_AUTHOR_ARG, bookModel.author)
-        bundle.putString(Constants.IMAGE_URL_ARG, bookModel.imageUrl)
+        bundle.putString(Constants.BOOK_TITLE_ARG, bookPreview.name)
+        bundle.putString(Constants.BOOK_AUTHOR_ARG, bookPreview.author)
+        bundle.putString(Constants.IMAGE_URL_ARG, bookPreview.imageUrl)
         controller?.navigate(R.id.action_fragmentBooks_to_fragmentDetailBook, bundle, null, extras)
     }
 

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LiveTypingApp</string>
+    <string name="book_info">Описание</string>
+    <string name="about_book">О книге</string>
+    <string name="books_will_be_finded">Нужная книга всегда найдется</string>
+    <string name="data_not_loaded_error">Данные не найдены</string>
+    <string name="retry">Повторить</string>
 </resources>

@@ -14,8 +14,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="WallSearchView" parent="Widget.AppCompat.SearchView">
-        <item name="iconifiedByDefault">false</item>
-        <item name="colorControlActivated">#FFffffff</item>
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        //text color
+        <item name="android:editTextColor">@color/white</item>
+        //icon color
+        <item name="android:tint">@color/white</item>
+        //cursor color
+        <item name="colorAccent">@color/white</item>
+        //query search icon color
+        <item name="colorControlNormal">@color/white</item>
     </style>
 </resources>

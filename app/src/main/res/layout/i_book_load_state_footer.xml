@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="8dp">
@@ -15,12 +15,15 @@
         android:id="@+id/text_view_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Results could not be loaded" />
+        android:text="@string/data_not_loaded_error"
+        android:textSize="@dimen/low" />
 
     <Button
         android:id="@+id/button_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retry" />
+        android:text="@string/retry"
+        android:textSize="@dimen/low"
+        android:visibility="visible" />
 
 </LinearLayout>

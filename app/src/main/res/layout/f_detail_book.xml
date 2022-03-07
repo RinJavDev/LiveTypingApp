@@ -15,7 +15,10 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back_arrow"
+        app:title="@string/about_book"
+        app:titleTextColor="@color/white" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -43,7 +46,7 @@
                 style="@style/Widget.AppCompat.TextView.SpinnerItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Название книги"
+                android:text="TextView"
                 android:textSize="@dimen/hight"
                 android:transitionName="tv_book_name" />
 
@@ -51,8 +54,9 @@
                 android:id="@+id/tv_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:text="Автор"
+                android:paddingStart="8dp"
+                android:paddingRight="8dp"
+                android:text="TextView"
                 android:textSize="@dimen/medium"
                 android:transitionName="tv_author" />
 
@@ -60,9 +64,9 @@
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/divider_color" />
 
             <TextView
@@ -71,15 +75,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Описание"
+                android:text="@string/book_info"
                 android:textSize="@dimen/hight" />
 
             <TextView
                 android:id="@+id/tv_book_info"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Описание"
+                android:text="TextView"
                 android:textSize="@dimen/medium" />
         </LinearLayout>
     </ScrollView>

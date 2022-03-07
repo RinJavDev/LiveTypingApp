@@ -1,4 +1,4 @@
-package com.rinat.livetypingapp.util
+package com.rinat.livetypingapp.utils
 
 import android.content.Context
 import android.graphics.Canvas

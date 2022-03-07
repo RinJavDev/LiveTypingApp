@@ -13,10 +13,12 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class FragmentBooksViewModel @Inject constructor(private val networkDataSource: NetworkDataSource) :
+class FragmentBooksViewModel @Inject constructor(
+    private val networkDataSource: NetworkDataSource,
+    val router: MainRouter
+) :
     ViewModel() {
-    @Inject
-    lateinit var router: MainRouter
+
 
     private var _booksFlow: Flow<PagingData<BookPreview>> = networkDataSource.getSearchResults("")
     val booksFlow: Flow<PagingData<BookPreview>>
@@ -27,7 +29,7 @@ class FragmentBooksViewModel @Inject constructor(private val networkDataSource: 
         return booksFlow
     }
 
-    fun openDetail(bookModel: BookPreview, extras: FragmentNavigator.Extras) {
-        router.navigateToDetailBookInfo(bookModel, extras)
+    fun openDetail(bookPreview: BookPreview, extras: FragmentNavigator.Extras) {
+        router.navigateToDetailBookInfo(bookPreview, extras)
     }
 }
