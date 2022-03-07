@@ -2,6 +2,8 @@ package com.rinat.livetypingapp.ui.books
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -23,33 +25,45 @@ class BookAdapter(private val listener: OnItemClickListener) :
         val currentItem = getItem(position)
 
         if (currentItem != null) {
-            holder.bind(currentItem)
+            holder.bind(currentItem, position)
         }
     }
 
     inner class BookViewHolder(private val binding: IBookBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
+
         init {
-            binding.root.setOnClickListener {
-                val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val item = getItem(position)
-                    if (item != null) {
-                        listener.onItemClick(item)
+            binding.apply {
+                root.setOnClickListener {
+                    val position = bindingAdapterPosition
+
+                    if (position != RecyclerView.NO_POSITION) {
+                        val item = getItem(position)
+                        if (item != null) {
+                            var extras = FragmentNavigator.Extras.Builder()
+                                .addSharedElement(tvBookName, "tv_book_name")
+                                .addSharedElement(tvAuthor, "tv_author")
+                                .addSharedElement(ivBookIcon, "imageView").build()
+                            listener.onItemClick(item, extras)
+                        }
                     }
                 }
             }
+
         }
 
-        fun bind(book: Book) {
+        fun bind(book: Book, position: Int) {
             binding.apply {
-                tvBookName.text = book.volumeInfo.title
+                ViewCompat.setTransitionName(tvBookName, "tvBookName$position")
+                ViewCompat.setTransitionName(tvAuthor, "tvAuthor$position")
+                ViewCompat.setTransitionName(ivBookIcon, "ivBookIcon$position")
 
+                tvBookName.text = book.volumeInfo.title
                 book.volumeInfo.authors?.let {
                     tvAuthor.text = book.volumeInfo.authors[0]
                 }
-
                 book.volumeInfo.imageLinks?.let {
                     Glide
                         .with(ivBookIcon)
@@ -62,7 +76,7 @@ class BookAdapter(private val listener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun onItemClick(photo: Book)
+        fun onItemClick(photo: Book, extras: FragmentNavigator.Extras)
     }
 
     companion object {

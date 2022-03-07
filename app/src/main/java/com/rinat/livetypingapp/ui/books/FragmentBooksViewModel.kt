@@ -2,6 +2,7 @@ package com.rinat.livetypingapp.ui.books
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.rinat.livetypingapp.network.NetworkDataSource
@@ -26,7 +27,7 @@ class FragmentBooksViewModel @Inject constructor(private val networkDataSource: 
         return booksFlow
     }
 
-    fun openDetail(book: Book) {
-        router.navigateToDetailBookInfo(book)
+    fun openDetail(book: Book, extras: FragmentNavigator.Extras) {
+        router.navigateToDetailBookInfo(book, extras)
     }
 }

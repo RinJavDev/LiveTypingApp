@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:scaleType="fitCenter"
+                android:transitionName="imageView"
                 tools:src="@android:drawable/edit_text" />
 
             <TextView
@@ -43,14 +44,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Название книги"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:transitionName="tv_book_name" />
 
             <TextView
                 android:id="@+id/tv_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
-                android:text="Автор" />
+                android:text="Автор"
+                android:transitionName="tv_author" />
 
             <View
                 android:id="@+id/view"
