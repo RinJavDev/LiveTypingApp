@@ -39,6 +39,7 @@ class MainRouter @Inject constructor() {
         bundle.putString(Constants.BOOK_TITLE_ARG, bookPreview.name)
         bundle.putString(Constants.BOOK_AUTHOR_ARG, bookPreview.author)
         bundle.putString(Constants.IMAGE_URL_ARG, bookPreview.imageUrl)
+        bundle.putString(Constants.INFO_ARG, bookPreview.info)
         controller?.navigate(R.id.action_fragmentBooks_to_fragmentDetailBook, bundle, null, extras)
     }
 

@@ -8,6 +8,7 @@ fun BookModel.mapToBookPreview(): BookPreview {
     return BookPreview(
         volumeInfo.title,
         volumeInfo.authors?.joinToString(", ") ?: "Неизвестный автор",
-        volumeInfo.imageLinks?.thumbnail ?: ""
+        volumeInfo.imageLinks?.thumbnail ?: "",
+        volumeInfo.description?:"Описание отсутсвует"
     )
 }

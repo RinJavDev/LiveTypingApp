@@ -34,11 +34,12 @@ class DetailBookFragment : Fragment(R.layout.f_detail_book) {
         binding.apply {
             Glide
                 .with(imageView)
-                .load(args?.getString(Constants.IMAGE_URL_ARG, null))
+                .load(args?.getString(Constants.IMAGE_URL_ARG, ""))
                 .error(R.drawable.error_image)
                 .into(imageView)
-            tvBookName.text = args?.getString(Constants.BOOK_TITLE_ARG, null)
-            tvAuthor.text = args?.getString(Constants.BOOK_AUTHOR_ARG, null)
+            tvBookName.text = args?.getString(Constants.BOOK_TITLE_ARG, "")
+            tvAuthor.text = args?.getString(Constants.BOOK_AUTHOR_ARG, "")
+            tvBookInfo.text = args?.getString(Constants.INFO_ARG, "")
             toolbarDetailBook.setNavigationOnClickListener {
                 viewModel.navigateBack()
             }

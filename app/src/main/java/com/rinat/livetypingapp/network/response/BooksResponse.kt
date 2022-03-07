@@ -7,7 +7,8 @@ open class BookModel(val volumeInfo: VolumeInfo)
 data class VolumeInfo(
     val title: String,
     val authors: Array<String>?,
-    val imageLinks: ImageLink?
+    val imageLinks: ImageLink?,
+    val description:String?
 )
 
 data class ImageLink(
