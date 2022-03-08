@@ -9,7 +9,7 @@ interface BookApi {
 
     @GET("books/v1/volumes")
     suspend fun getBooks(
-        @Query("q") query: String,
+        @Query("q2") query: String,
         @Query("startIndex") index: Int
     ): Response<BooksResponse>
 }

@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textSize="@dimen/hight"
+                android:textSize="@dimen/hight_font_size"
                 android:transitionName="tv_book_name" />
 
             <TextView
@@ -57,7 +57,7 @@
                 android:paddingStart="8dp"
                 android:paddingRight="8dp"
                 android:text="TextView"
-                android:textSize="@dimen/medium"
+                android:textSize="@dimen/medium_font_size"
                 android:transitionName="tv_author" />
 
             <View
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/book_info"
-                android:textSize="@dimen/hight" />
+                android:textSize="@dimen/hight_font_size" />
 
             <TextView
                 android:id="@+id/tv_book_info"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="TextView"
-                android:textSize="@dimen/medium" />
+                android:textSize="@dimen/medium_font_size" />
         </LinearLayout>
     </ScrollView>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="low">16sp</dimen>
-    <dimen name="medium">18sp</dimen>
-    <dimen name="hight">20sp</dimen>
+    <dimen name="low_font_size">16sp</dimen>
+    <dimen name="medium_font_size">18sp</dimen>
+    <dimen name="hight_font_size">20sp</dimen>
 </resources>

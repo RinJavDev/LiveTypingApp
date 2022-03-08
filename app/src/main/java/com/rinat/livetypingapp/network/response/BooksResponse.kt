@@ -1,17 +1,12 @@
 package com.rinat.livetypingapp.network.response
 
-data class BooksResponse(val items: List<BookModel>?, val error: Error?)
+import com.rinat.livetypingapp.network.response.base.BaseResponse
+import com.rinat.livetypingapp.network.response.models.BookModel
 
-open class BookModel(val volumeInfo: VolumeInfo)
+data class BooksResponse(val items: List<BookModel>?) : BaseResponse()
 
-data class VolumeInfo(
-    val title: String,
-    val authors: Array<String>?,
-    val imageLinks: ImageLink?,
-    val description:String?
-)
 
-data class ImageLink(
-    val smallThumbnail: String,
-    val thumbnail: String
-)
+
+
+
+

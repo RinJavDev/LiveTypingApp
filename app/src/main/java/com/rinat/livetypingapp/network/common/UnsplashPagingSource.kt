@@ -3,11 +3,10 @@ package com.rinat.livetypingapp.network.common
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpStatus
-import com.google.gson.Gson
 import com.rinat.livetypingapp.data.BookPreview
-import com.rinat.livetypingapp.mapper.mapToBookPreview
+import com.rinat.livetypingapp.extensions.getError
+import com.rinat.livetypingapp.extensions.mapToBookPreview
 import com.rinat.livetypingapp.network.api.BookApi
-import com.rinat.livetypingapp.network.response.BooksResponse
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -40,11 +39,7 @@ class UnsplashPagingSource(
                 else -> {
                     LoadResult.Error(
                         Exception(
-                            "${response.code()} ${
-                                Gson().fromJson(
-                                    response.errorBody()?.string(), BooksResponse::class.java
-                                ).error?.message
-                            }"
+                            response.getError()?.message
                         )
                     )
                 }

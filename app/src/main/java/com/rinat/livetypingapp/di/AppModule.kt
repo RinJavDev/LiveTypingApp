@@ -1,6 +1,6 @@
 package com.rinat.livetypingapp.di
 
-import com.rinat.livetypingapp.network.NetworkDataSource
+import com.rinat.livetypingapp.network.NetworkRepository
 import com.rinat.livetypingapp.network.api.BookApi
 import com.rinat.livetypingapp.router.MainRouter
 import dagger.Module
@@ -41,7 +41,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNetworkDataSource(bookApi: BookApi): NetworkDataSource = NetworkDataSource(bookApi)
+    fun provideNetworkDataSource(bookApi: BookApi): NetworkRepository = NetworkRepository(bookApi)
 
     @Provides
     @Singleton

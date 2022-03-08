@@ -6,7 +6,7 @@ import com.rinat.livetypingapp.network.api.BookApi
 import com.rinat.livetypingapp.network.common.UnsplashPagingSource
 import javax.inject.Inject
 
-class NetworkDataSource @Inject constructor(private val mainService: BookApi) {
+class NetworkRepository @Inject constructor(private val mainService: BookApi) {
 
     fun getSearchResults(query: String) =
         Pager(

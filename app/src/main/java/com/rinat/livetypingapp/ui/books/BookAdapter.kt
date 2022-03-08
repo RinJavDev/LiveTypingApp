@@ -7,13 +7,11 @@ import androidx.navigation.fragment.FragmentNavigator
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.rinat.livetypingapp.R
 import com.rinat.livetypingapp.data.BookPreview
 import com.rinat.livetypingapp.databinding.IBookBinding
-import com.rinat.livetypingapp.network.response.BookModel
 
 class BookAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<BookPreview, BookAdapter.BookViewHolder>(BOOK_COMPARATOR) {
@@ -65,16 +63,16 @@ class BookAdapter(private val listener: OnItemClickListener) :
 
                 tvBookName.text = bookPreview.name
 
-                    tvAuthor.text = bookPreview.author
+                tvAuthor.text = bookPreview.author
 
 
-                    Glide
-                        .with(ivBookIcon)
-                        .load(bookPreview.imageUrl)
-                        .placeholder(R.drawable.loading)
-                        .error(R.drawable.error_image)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(ivBookIcon)
+                Glide
+                    .with(ivBookIcon)
+                    .load(bookPreview.imageUrl)
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error_image)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(ivBookIcon)
 
             }
         }
