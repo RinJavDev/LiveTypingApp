@@ -2,11 +2,12 @@ package com.rinat.livetypingapp.network.common
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpStatus
 import com.rinat.livetypingapp.data.BookPreview
 import com.rinat.livetypingapp.extensions.getError
 import com.rinat.livetypingapp.extensions.mapToBookPreview
 import com.rinat.livetypingapp.network.api.BookApi
+import com.rinat.livetypingapp.utils.Constants.HTTP_STATUS_CODE_SUCCES
+import com.rinat.livetypingapp.utils.Constants.HTTP_STATUS_NOT_FOUND
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -22,9 +23,9 @@ class UnsplashPagingSource(
 
         return try {
 
-            val response = unsplashApi.getBooks(query, position*params.loadSize, query)
+            val response = unsplashApi.getBooks(query, position * params.loadSize, query)
             when (response.code()) {
-                HttpStatus.SC_OK -> {
+                HTTP_STATUS_CODE_SUCCES -> {
                     val books =
                         response.body()?.items?.map { it.mapToBookPreview() } ?: emptyList()
                     LoadResult.Page(
@@ -33,7 +34,7 @@ class UnsplashPagingSource(
                         nextKey = if (books.isEmpty()) null else position + 1
                     )
                 }
-                HttpStatus.SC_NOT_FOUND -> {
+                HTTP_STATUS_NOT_FOUND -> {
                     LoadResult.Error(Exception("${response.code()}"))
                 }
                 else -> {
