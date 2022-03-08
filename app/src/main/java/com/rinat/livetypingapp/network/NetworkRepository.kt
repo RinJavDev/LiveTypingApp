@@ -11,12 +11,13 @@ class NetworkRepository @Inject constructor(private val mainService: BookApi) {
     fun getSearchResults(query: String) =
         Pager(
             config = PagingConfig(
-                pageSize = 20,
-                maxSize = 100,
+                pageSize = 10,
+                maxSize = 40,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = { UnsplashPagingSource(mainService, query) }
         ).flow
 
-    suspend fun getBooks(query: String, index: Int) = mainService.getBooks(query, index).body()
+    suspend fun getBooks(query: String, index: Int) =
+        mainService.getBooks(query, index, query).body()
 }

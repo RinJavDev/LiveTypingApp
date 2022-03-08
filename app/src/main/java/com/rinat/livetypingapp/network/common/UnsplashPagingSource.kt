@@ -22,7 +22,7 @@ class UnsplashPagingSource(
 
         return try {
 
-            val response = unsplashApi.getBooks(query, params.loadSize)
+            val response = unsplashApi.getBooks(query, position*params.loadSize, query)
             when (response.code()) {
                 HttpStatus.SC_OK -> {
                     val books =
