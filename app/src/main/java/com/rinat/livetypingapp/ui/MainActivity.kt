@@ -16,4 +16,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.a_main)
         router.setActivity(this)
     }
+
+    //test squash
+    //two
+    //333
 }
